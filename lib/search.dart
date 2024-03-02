@@ -3,13 +3,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Search extends StatefulWidget {
+  const Search({super.key});
+
   @override
   _SearchState createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
-  TextEditingController _controller = TextEditingController();
-  List<String> _movieCategories = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Romance', 'Sci-Fi']; // Sample categories
+  final TextEditingController _controller = TextEditingController();
+  final List<String> _movieCategories = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Romance', 'Sci-Fi']; // Sample categories
   bool _showCategories = true;
   List<Map<String, dynamic>> _searchResults = [];
 
@@ -34,7 +36,7 @@ class _SearchState extends State<Search> {
   }
 
   Future<void> _searchMovies(String query) async {
-    final String apiKey = '80cc2e03cf6fa0d932e0efafa543fb2e';
+    const String apiKey = '80cc2e03cf6fa0d932e0efafa543fb2e';
     final String apiUrl = 'https://api.themoviedb.org/3/search/movie?api_key=$apiKey&query=$query';
 
     try {
@@ -68,7 +70,7 @@ class _SearchState extends State<Search> {
             ),
             filled: true,
             fillColor: Colors.white,
-            contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
           ),
         ),
       ),
@@ -78,13 +80,13 @@ class _SearchState extends State<Search> {
 
   Widget _buildCategoryList() {
     return ListView.builder(
-      itemCount: (_movieCategories.length / 2).ceil(), // Calculate the number of rows needed
+      itemCount: (_movieCategories.length / 2).ceil(),
       itemBuilder: (context, index) {
         return Row(
           children: [
-            _buildCategoryItem(index * 2), // First box in the row
-            SizedBox(width: 8), // Add some space between boxes
-            _buildCategoryItem(index * 2 + 1), // Second box in the row
+            _buildCategoryItem(index * 2), 
+            const SizedBox(width: 8), 
+            _buildCategoryItem(index * 2 + 1), 
           ],
         );
       },
@@ -98,15 +100,15 @@ class _SearchState extends State<Search> {
           elevation: 4,
           child: InkWell(
             onTap: () {
-              // Handle category selection
+             
             },
             child: Padding(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: Center(
                 child: Text(
                   _movieCategories[categoryIndex],
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -114,7 +116,7 @@ class _SearchState extends State<Search> {
         ),
       );
     } else {
-      return Expanded(child: Container()); // Empty container if no more categories
+      return Expanded(child: Container()); 
     }
   }
 
@@ -125,7 +127,7 @@ class _SearchState extends State<Search> {
         final movie = _searchResults[index];
         return GestureDetector(
           onTap: () {
-            // Add functionality to navigate to movie details page
+            
           },
           child: Card(
             elevation: 4,
@@ -144,10 +146,10 @@ class _SearchState extends State<Search> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     movie['title'] ?? 'Untitled',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     textAlign: TextAlign.center,

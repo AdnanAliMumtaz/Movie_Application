@@ -7,16 +7,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
-      theme: ThemeData.dark(), // Set the overall theme to dark
+      theme: ThemeData.dark(), 
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -41,53 +45,69 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bottom Navigation Bar Example'),
-        backgroundColor: Colors.black, // Change the background color of the app bar
+        title: const Text('Modiv'),
+        backgroundColor: Colors.black, 
       ),
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent, // Disable splash color
-          highlightColor: Colors.transparent, // Disable highlight color
-        ),
-        child: Container(
-          height: 70, // Increase the height of the bottom navigation bar
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                Colors.black,
-                Colors.transparent,
-              ],
+      body: Stack(
+        children: [
+          _pages[_selectedIndex],
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              height: 70,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.black,
+                    Colors.black.withOpacity(0.7), 
+                    Colors.black.withOpacity(0.5), 
+                    Colors.transparent
+                  ],
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  buildNavBarItem(Icons.home, 'Home', 0),
+                  buildNavBarItem(Icons.trending_up, 'Trending', 1),
+                  buildNavBarItem(Icons.search, 'Search', 2),
+                  buildNavBarItem(Icons.watch, 'Watch', 3),
+                ],
+              ),
             ),
           ),
-          child: BottomNavigationBar(
-            backgroundColor: Colors.transparent, // Set background to transparent
-            type: BottomNavigationBarType.fixed, // Ensure all labels are visible
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: Colors.white), // Change the color of the icon
-                label: 'Home',
+        ],
+      ),
+    );
+  }
+
+  Widget buildNavBarItem(IconData icon, String title, int index) {
+    bool isSelected = index == _selectedIndex;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => _onItemTapped(index),
+        child: Container(
+          color: Colors.transparent,
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: isSelected ? Colors.white : Colors.grey, 
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.trending_up, color: Colors.white), // Change the color of the icon
-                label: 'Trending',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search, color: Colors.white), // Change the color of the icon
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.watch, color: Colors.white), // Change the color of the icon
-                label: 'Watch',
+              const SizedBox(height: 4), 
+              Text(
+                title,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Colors.grey, 
+                ),
               ),
             ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.white, // Change the color of the selected item
-            unselectedItemColor: Colors.grey, // Change the color of the unselected items
-            onTap: _onItemTapped,
-            selectedLabelStyle: TextStyle(color: Colors.white), // Set the color of the selected item label
           ),
         ),
       ),
@@ -96,35 +116,13 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Home Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class TrendingPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Trending Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class SearchPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Search Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
       ),
     );
@@ -134,7 +132,7 @@ class SearchPage extends StatelessWidget {
 class WatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Watch Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),

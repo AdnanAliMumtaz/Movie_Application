@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Trending extends StatefulWidget {
+  const Trending({super.key});
+
   @override
   _TrendingState createState() => _TrendingState();
 }
@@ -18,7 +20,7 @@ class _TrendingState extends State<Trending> {
 
   Future<void> _fetchVideos() async {
     const String apiKey = '80cc2e03cf6fa0d932e0efafa543fb2e';
-    final String apiUrl = 'https://api.themoviedb.org/3/trending/all/day?api_key=$apiKey';
+    const String apiUrl = 'https://api.themoviedb.org/3/trending/all/day?api_key=$apiKey';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -42,7 +44,7 @@ class _TrendingState extends State<Trending> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trending'),
+        title: const Text('Trending'),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
@@ -66,25 +68,25 @@ class VideoCard extends StatelessWidget {
   final String description;
 
   const VideoCard({
-    Key? key,
+    super.key,
     required this.thumbnailUrl,
     required this.title,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.transparent, // Set background color to transparent
-      margin: EdgeInsets.all(8),
+      color: Colors.transparent, 
+      margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Set border radius for rounded corners
+        borderRadius: BorderRadius.circular(12), 
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect( // Clip the image with rounded corners
-            borderRadius: BorderRadius.circular(12), // Same border radius as Card
+          ClipRRect( 
+            borderRadius: BorderRadius.circular(12), 
             child: Image.network(
               thumbnailUrl,
               height: 200,
@@ -92,15 +94,15 @@ class VideoCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   description,
                   maxLines: 2,
@@ -114,87 +116,3 @@ class VideoCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// class VideoCard extends StatelessWidget {
-//   final String thumbnailUrl;
-//   final String title;
-//   final String description;
-//   final String type;
-
-//   const VideoCard({
-//     Key? key,
-//     required this.thumbnailUrl,
-//     required this.title,
-//     required this.description,
-//     required this.type,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       color: Colors.transparent,
-//       margin: EdgeInsets.all(8),
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(12),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: [
-//           Stack(
-//             alignment: Alignment.center,
-//             children: [
-//               ClipRRect(
-//                 borderRadius: BorderRadius.only(
-//                   topLeft: Radius.circular(12),
-//                   topRight: Radius.circular(12),
-//                 ),
-//                 child: Image.network(
-//                   thumbnailUrl,
-//                   height: 200,
-//                   fit: BoxFit.cover,
-//                 ),
-//               ),
-//               Positioned(
-//                 top: 8,
-//                 right: 8,
-//                 child: ElevatedButton(
-//                   onPressed: () {
-//                     // Add functionality to watch the video
-//                   },
-//                   child: Text('Watch'),
-//                 ),
-//               ),
-//             ],
-//           ),
-//           Padding(
-//             padding: EdgeInsets.all(8),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(
-//                   title,
-//                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-//                 ),
-//                 SizedBox(height: 4),
-//                 Text(
-//                   type,
-//                   style: TextStyle(fontSize: 16, color: Colors.grey),
-//                 ),
-//                 SizedBox(height: 4),
-//                 Text(
-//                   description,
-//                   maxLines: 3,
-//                   overflow: TextOverflow.ellipsis,
-//                   style: TextStyle(fontSize: 16, color: Colors.grey),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
