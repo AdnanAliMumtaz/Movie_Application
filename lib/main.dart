@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'trending.dart';
 import 'search.dart';
+import 'home.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
-      theme: ThemeData.dark(), 
+      theme: ThemeData.dark(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  PageController _pageController = PageController();
 
   final List<Widget> _pages = [
-    HomePage(),
+    Home(),
     Trending(),
     Search(),
     WatchPage(),
@@ -39,18 +37,31 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
+    _pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Modiv'),
-        backgroundColor: Colors.black, 
+        title: Text('Modiv'),
+        backgroundColor: Colors.black,
       ),
       body: Stack(
         children: [
-          _pages[_selectedIndex],
+          PageView(
+            controller: _pageController,
+            children: _pages,
+            onPageChanged: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
           Positioned(
             left: 0,
             right: 0,
@@ -63,8 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   end: Alignment.topCenter,
                   colors: [
                     Colors.black,
-                    Colors.black.withOpacity(0.7), 
-                    Colors.black.withOpacity(0.5), 
+                    Colors.black.withOpacity(0.7),
+                    Colors.black.withOpacity(0.5),
                     Colors.transparent
                   ],
                 ),
@@ -98,13 +109,13 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Icon(
                 icon,
-                color: isSelected ? Colors.white : Colors.grey, 
+                color: isSelected ? Colors.white : Colors.grey,
               ),
-              const SizedBox(height: 4), 
+              SizedBox(height: 4),
               Text(
                 title,
                 style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.grey, 
+                  color: isSelected ? Colors.white : Colors.grey,
                 ),
               ),
             ],
@@ -115,24 +126,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Home Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
 class WatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
         'Watch Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
