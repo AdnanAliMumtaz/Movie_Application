@@ -1,15 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'trending.dart';
+import 'search.dart';
+import 'home.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home>
-{
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,35 +22,35 @@ class _HomeState extends State<Home>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Trending Movies"),
-            const SizedBox(height: 15,), 
+            const SizedBox(height: 15,),
             SizedBox(
               width: double.infinity,
               child: CarouselSlider.builder(
-                itemCount: 10, 
+                itemCount: 10,
                 options: CarouselOptions(
-                  height: 300, 
+                  height: 300,
                   autoPlay: true,
                   viewportFraction: 0.55,
                   enlargeCenterPage: true,
                   pageSnapping: true,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   autoPlayAnimationDuration: const Duration(seconds: 1),
-                  ), 
+                ),
                 itemBuilder: (context, itemIndex, pageViewIndex) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
                       height: 300,
-                      width: 200, 
+                      width: 200,
                       color: Colors.amber,
                     ),
                   );
                 },
-              )
+              ),
             ),
           ],
         ),
-      ), 
+      ),
     );
-   }
+  }
 }

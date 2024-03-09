@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "667588317697",
+    "project_id": "movietrackapplication-9ce11",
+    "storage_bucket": "movietrackapplication-9ce11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667588317697:android:643a8e3dedd79ddc55a600",
+        "android_client_info": {
+          "package_name": "com.example.movie_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJO74hNa58P3Q7y2_CYgsR8aXXXk9OXNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

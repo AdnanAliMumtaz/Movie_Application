@@ -38,8 +38,12 @@ dependencies:
   http: ^1.2.1
   url_launcher: ^6.2.5
   carousel_slider: ^4.2.1
-  firebase_core: ^1.20.0
-  firebase_auth: ^3.5.0
+  # firebase_core: ^1.20.0
+  firebase_core: ^2.24.2
+  # firebase_auth: ^3.5.0
+  firebase_auth: ^4.0.0
+  shared_preferences: ^2.2.2
+  # shared_preferences: ^2.0.10
 
 dev_dependencies:
   flutter_test:
