@@ -1,8 +1,8 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:movie_app/trending.dart';
 import 'package:movie_app/search.dart';
 import 'package:movie_app/home.dart';
+import 'package:movie_app/watch.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -19,7 +19,7 @@ class _NavigationState extends State<Navigation> {
     Home(),
     Trending(),
     Search(),
-    WatchPage(),
+    Watch(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,8 +37,9 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Modiv'),
+        title: const Text('Modiv',),
         backgroundColor: Colors.black,
+        automaticallyImplyLeading: false,
       ),
       body: Stack(
         children: [
@@ -110,18 +111,6 @@ class _NavigationState extends State<Navigation> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class WatchPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Watch Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
       ),
     );
   }

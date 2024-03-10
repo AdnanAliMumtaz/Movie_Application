@@ -40,7 +40,7 @@ class Login extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Navigation()),
+                    MaterialPageRoute(builder: (context) => const Navigation()),
                   );
                 },
                 child: Container(
@@ -61,7 +61,7 @@ class Login extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,7 +85,7 @@ class Login extends StatelessWidget {
                     onTap: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => Register()),
+                        MaterialPageRoute(builder: (context) => const Register()),
                         (route) => false,
                       );
                     },

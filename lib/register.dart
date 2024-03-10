@@ -15,9 +15,9 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool isSigningUp = false;
 
@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("SignUp"),
+        title: const Text("SignUp"),
       ),
       body: Center(
         child: Padding(
@@ -143,11 +143,9 @@ class _RegisterState extends State<Register> {
       isSigningUp = false;
     });
     if (user != null) {
-      // showToast(message: "User is successfully created");
       print("User is successfully created");
       Navigator.pushNamed(context, "/home");
     } else {
-      // showToast(message: "Some error happend");
       print("Some error happend");
     }
   }

@@ -16,7 +16,7 @@ class _splashScreenState extends State<splashScreen> {
   void initState()
   {
    Future.delayed(
-    const Duration(seconds: 3), (){
+    const Duration(seconds: 1), (){
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => widget.child!), (route) => false);
     }
    );
