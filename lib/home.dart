@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   List<dynamic> trendingMovies = [];
   List<Map<String, dynamic>> categories = [
     {'id': -1, 'name': 'All'},
-  ]; 
+  ];
   int selectedCategoryIndex = 0;
 
   @override
@@ -100,7 +100,12 @@ class _HomeState extends State<Home> {
       final response = await http.get(Uri.parse(topRatedApiUrl));
       if (response.statusCode == 200) {
         final List<dynamic> movies = json.decode(response.body)['results'];
-        return movies.where((movie) => movie['poster_path'] != null).toList();
+        return movies
+            .where((movie) =>
+                movie['poster_path'] != null &&
+                movie['overview'] != null &&
+                movie['overview'].isNotEmpty)
+            .toList();
       } else {
         throw Exception(
             'Failed to load top rated movies: ${response.statusCode}');
@@ -124,7 +129,12 @@ class _HomeState extends State<Home> {
       final response = await http.get(Uri.parse(upcomingApiUrl));
       if (response.statusCode == 200) {
         final List<dynamic> movies = json.decode(response.body)['results'];
-        return movies.where((movie) => movie['poster_path'] != null).toList();
+        return movies
+            .where((movie) =>
+                movie['poster_path'] != null &&
+                movie['overview'] != null &&
+                movie['overview'].isNotEmpty)
+            .toList();
       } else {
         throw Exception(
             'Failed to load upcoming movies: ${response.statusCode}');
@@ -136,30 +146,29 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<dynamic>> fetchPopularActors(int categoryId) async {
-  const String apiKey = '80cc2e03cf6fa0d932e0efafa543fb2e';
-  String popularActorsApiUrl =
-      'https://api.themoviedb.org/3/person/popular?api_key=$apiKey';
+    const String apiKey = '80cc2e03cf6fa0d932e0efafa543fb2e';
+    String popularActorsApiUrl =
+        'https://api.themoviedb.org/3/person/popular?api_key=$apiKey';
 
-  if (categoryId != -1) {
-    popularActorsApiUrl =
-        'https://api.themoviedb.org/3/discover/person?api_key=$apiKey&with_genres=$categoryId';
-  }
-
-  try {
-    final response = await http.get(Uri.parse(popularActorsApiUrl));
-    if (response.statusCode == 200) {
-      final List<dynamic> actors = json.decode(response.body)['results'];
-      return actors.where((actor) => actor['profile_path'] != null).toList();
-    } else {
-      throw Exception(
-          'Failed to load popular actors: ${response.statusCode}');
+    if (categoryId != -1) {
+      popularActorsApiUrl =
+          'https://api.themoviedb.org/3/discover/person?api_key=$apiKey&with_genres=$categoryId';
     }
-  } catch (e) {
-    print('Error fetching popular actors: $e');
-    return [];
-  }
-}
 
+    try {
+      final response = await http.get(Uri.parse(popularActorsApiUrl));
+      if (response.statusCode == 200) {
+        final List<dynamic> actors = json.decode(response.body)['results'];
+        return actors.where((actor) => actor['profile_path'] != null).toList();
+      } else {
+        throw Exception(
+            'Failed to load popular actors: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching popular actors: $e');
+      return [];
+    }
+  }
 
   void _showMovieDetail(int movieId) {
     Navigator.push(
@@ -195,14 +204,14 @@ class _HomeState extends State<Home> {
                       }
                     },
                     child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
                       margin: EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                         color: selectedCategoryIndex == index
                             ? Colors.red
                             : Colors.grey.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
                         categories[index]['name'],
@@ -236,7 +245,6 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index, pageViewIndex) {
                       final movie = trendingMovies[index];
                       if (movie['poster_path'] == null) {
-                        // Exclude movies without poster path
                         return const SizedBox.shrink();
                       }
                       return GestureDetector(
@@ -278,7 +286,8 @@ class _HomeState extends State<Home> {
                 }
                 List<dynamic> topRatedMovies = snapshot.data ?? [];
                 if (topRatedMovies.isEmpty) {
-                  return const Center(child: Text('No top rated movies available.'));
+                  return const Center(
+                      child: Text('No top rated movies available.'));
                 }
                 return SizedBox(
                   height: 200,
@@ -289,15 +298,20 @@ class _HomeState extends State<Home> {
                     itemCount: topRatedMovies.length,
                     itemBuilder: (context, index) {
                       final movie = topRatedMovies[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.network(
-                            'https://image.tmdb.org/t/p/w500/${movie['poster_path']}',
-                            fit: BoxFit.cover,
-                            height: 200,
-                            width: 150,
+                      return GestureDetector(
+                        onTap: () {
+                          _showMovieDetail(movie['id']);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/w500/${movie['poster_path']}',
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: 150,
+                            ),
                           ),
                         ),
                       );
@@ -328,7 +342,8 @@ class _HomeState extends State<Home> {
                 }
                 List<dynamic> upcomingMovies = snapshot.data ?? [];
                 if (upcomingMovies.isEmpty) {
-                  return const Center(child: Text('No upcoming movies available.'));
+                  return const Center(
+                      child: Text('No upcoming movies available.'));
                 }
                 return SizedBox(
                   height: 200,
@@ -339,15 +354,20 @@ class _HomeState extends State<Home> {
                     itemCount: upcomingMovies.length,
                     itemBuilder: (context, index) {
                       final movie = upcomingMovies[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.network(
-                            'https://image.tmdb.org/t/p/w500/${movie['poster_path']}',
-                            fit: BoxFit.cover,
-                            height: 200,
-                            width: 150,
+                      return GestureDetector(
+                        onTap: () {
+                          _showMovieDetail(movie['id']);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/w500/${movie['poster_path']}',
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: 150,
+                            ),
                           ),
                         ),
                       );
@@ -370,7 +390,8 @@ class _HomeState extends State<Home> {
               height: 150,
               width: double.infinity,
               child: FutureBuilder(
-                future: fetchPopularActors(categories[selectedCategoryIndex]['id']),
+                future:
+                    fetchPopularActors(categories[selectedCategoryIndex]['id']),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -380,7 +401,8 @@ class _HomeState extends State<Home> {
                   }
                   List<dynamic> popularActors = snapshot.data ?? [];
                   if (popularActors.isEmpty) {
-                    return const Center(child: Text('No popular actors available.'));
+                    return const Center(
+                        child: Text('No popular actors available.'));
                   }
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,

@@ -90,21 +90,23 @@ class _SearchState extends State<Search> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        automaticallyImplyLeading: false, 
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: TextField(
           controller: _controller,
+          style: TextStyle(color: Colors.black), 
           decoration: InputDecoration(
             hintText: 'What do you want to watch?',
             hintStyle: TextStyle(
                 color: Colors.grey[700]), 
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide.none, 
             ),
             filled: true,
             fillColor: Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-                vertical: 10, horizontal: 20),
+                vertical: 10, horizontal: 20), 
             prefixIcon: Icon(Icons.search,
                 color: Colors.black, size: 28.0), 
           ),
@@ -116,14 +118,12 @@ class _SearchState extends State<Search> {
 
   Widget _buildCategoryList() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 16), 
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView.builder(
         itemCount: (_movieCategories.length / 2).ceil(),
         itemBuilder: (context, index) {
           return Row(
-            mainAxisAlignment: MainAxisAlignment
-                .spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildCategoryItem(index * 2),
               const SizedBox(width: 8),
@@ -153,31 +153,29 @@ class _SearchState extends State<Search> {
       return Expanded(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: 8), // Adjusted vertical padding
+              vertical: 8), 
           child: Card(
             elevation: 4,
             color: darkCategoryColors[categoryIndex %
                 darkCategoryColors
-                    .length], // Assign a dark color based on category index
+                    .length], 
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(5), 
+              borderRadius: BorderRadius.circular(5),
             ),
             child: InkWell(
               onTap: () {},
               child: SizedBox(
-                
                 height: 100,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Align(
-                    alignment: Alignment.topLeft, 
+                    alignment: Alignment.topLeft,
                     child: Text(
                       _movieCategories[categoryIndex],
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                      ), 
+                      ),
                     ),
                   ),
                 ),
@@ -193,45 +191,72 @@ class _SearchState extends State<Search> {
 
   Widget _buildSearchResults() {
     return ListView.builder(
-      itemCount: _searchResults.length,
+      itemCount: (_searchResults.length / 2).ceil(),
       itemBuilder: (context, index) {
-        final movie = _searchResults[index];
-        return GestureDetector(
-          onTap: () {},
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w200${movie['poster_path']}',
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        Container(color: Colors.grey),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    movie['title'] ?? 'Untitled',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
+        int startIndex = index * 2;
+        int endIndex = startIndex + 1;
+        if (endIndex >= _searchResults.length) {
+          endIndex = _searchResults.length - 1;
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildSearchResultItem(_searchResults[startIndex]),
+              SizedBox(width: 8),
+              _buildSearchResultItem(_searchResults[endIndex]),
+            ],
           ),
         );
       },
     );
   }
+
+
+
+
+  Widget _buildSearchResultItem(Map<String, dynamic> movie) {
+  return Expanded(
+    child: Card(
+      elevation: 4,
+      color: Colors.grey[900], 
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              'https://image.tmdb.org/t/p/w500${movie['poster_path']}', 
+              height: 200, 
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) =>
+                  Container(color: Colors.grey),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              movie['title'] ?? 'Untitled',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, backgroundColor: Colors.transparent ), 
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          // SizedBox(height: 20,),
+        ],
+      ),
+    ),
+  );
+}
+
+
+
+
 
   @override
   void dispose() {
