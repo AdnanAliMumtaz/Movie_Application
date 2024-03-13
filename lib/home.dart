@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:movie_app/actor.dart';
 import 'package:movie_app/movie.dart';
 
 class Home extends StatefulWidget {
@@ -320,6 +321,7 @@ class _HomeState extends State<Home> {
                 );
               },
             ),
+            
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
@@ -376,6 +378,9 @@ class _HomeState extends State<Home> {
                 );
               },
             ),
+
+
+            // Popular Actors
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(

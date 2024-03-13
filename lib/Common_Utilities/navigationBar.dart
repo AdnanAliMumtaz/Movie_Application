@@ -17,9 +17,9 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _pages = [
     Home(),
-    Trending(),
     Search(),
     Watch(),
+    Settings(),
   ];
 
   void _onItemTapped(int index) {
@@ -74,9 +74,9 @@ class _NavigationState extends State<Navigation> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   buildNavBarItem(Icons.home, 'Home', 0),
-                  buildNavBarItem(Icons.trending_up, 'Trending', 1),
-                  buildNavBarItem(Icons.search, 'Search', 2),
-                  buildNavBarItem(Icons.watch, 'Watch', 3),
+                  buildNavBarItem(Icons.search, 'Search', 1),
+                  buildNavBarItem(Icons.watch, 'Watch', 2),
+                  buildNavBarItem(Icons.settings, 'Settings', 3),
                 ],
               ),
             ),

@@ -2,35 +2,39 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
-class splashScreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   final Widget? child;
-  const splashScreen({super.key, this.child});
+  const SplashScreen({Key? key, this.child}) : super(key: key);
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState()
-  {
-   Future.delayed(
-    const Duration(seconds: 1), (){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => widget.child!), (route) => false);
-    }
-   );
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => widget.child!),
+        (route) => false,
+      );
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: Text("Adnan's Application",
-      style: TextStyle(
-        color: Colors.black),
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Image.asset(
+          'Assets/images/modiv.png',
+          
+          width: 100,
+          height: 100,
+        ),
       ),
-    ));
+    );
   }
 }

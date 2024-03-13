@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Trending extends StatefulWidget {
-  const Trending({super.key});
+class Settings extends StatefulWidget {
+  const Settings({super.key});
 
   @override
-  _TrendingState createState() => _TrendingState();
+  _SettingsState createState() => _SettingsState();
 }
 
-class _TrendingState extends State<Trending> {
+class _SettingsState extends State<Settings> {
   List<Map<String, dynamic>> _videos = [];
 
   @override

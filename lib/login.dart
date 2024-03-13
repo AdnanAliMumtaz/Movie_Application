@@ -12,9 +12,9 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Login"),
+      // ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
             children: [
               const Text(
                 "Login",
-                style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.red),
               ),
               const SizedBox(height: 30),
               const FormContainerWidget(
@@ -47,7 +47,7 @@ class Login extends StatelessWidget {
                   width: double.infinity,
                   height: 45,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Center(
@@ -92,7 +92,7 @@ class Login extends StatelessWidget {
                     child: const Text(
                       "Register",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
