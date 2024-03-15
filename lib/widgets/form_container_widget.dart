@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class FormContainerWidget extends StatefulWidget {
   final TextEditingController? controller;
   final Key? fieldKey;
-  final bool? isPasswordField;
-  final String? hintText;
-  final String? labelText;
-  final FormFieldSetter<String>? onSaved;
-  final FormFieldValidator<String>? validator;
-  final ValueChanged<String>? onFieldSubmitted;
-  final TextInputType? inputType;
+  final bool? isPasswordField; // Indicates whether it's a password field
+  final String? hintText; // Hint text for the field
+  final String? labelText; // Label text for the field
+  final FormFieldSetter<String>? onSaved; // Function to be called when form is saved
+  final FormFieldValidator<String>? validator; // Validator for form field
+  final ValueChanged<String>? onFieldSubmitted; // Function to be called when field is submitted
+  final TextInputType? inputType; // Keyboard type for the field
 
   const FormContainerWidget({
-    super.key,
+    Key? key,
     this.controller,
     this.fieldKey,
     this.isPasswordField,
@@ -22,14 +22,14 @@ class FormContainerWidget extends StatefulWidget {
     this.validator,
     this.onFieldSubmitted,
     this.inputType,
-  });
+  }) : super(key: key); // Use const constructor and pass the key parameter
 
   @override
   _FormContainerWidgetState createState() => _FormContainerWidgetState();
 }
 
 class _FormContainerWidgetState extends State<FormContainerWidget> {
-  bool _obscureText = true;
+  bool _obscureText = true; // Toggle for password visibility
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +37,37 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(.35),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
+      height: 58,
       child: TextFormField(
-        style: const TextStyle(color: Colors.blue),
+        style: const TextStyle(color: Colors.white),
         controller: widget.controller,
         key: widget.fieldKey,
-        obscureText: widget.isPasswordField == true ? _obscureText : false,
+        obscureText: widget.isPasswordField ?? false, // Using null-aware operator
         decoration: InputDecoration(
-          border: InputBorder.none,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          ),
           filled: true,
           hintText: widget.hintText,
-          hintStyle: const TextStyle(color: Colors.black45),
+          hintStyle: const TextStyle(color: Colors.grey),
           labelText: widget.labelText,
-          suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
-            child: widget.isPasswordField == true
-                ? Icon(
-                    _obscureText
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                    color: _obscureText == false ? Colors.blue : Colors.grey,
-                  )
-                : const SizedBox(),
-          ),
+          // Show suffix icon only for password fields
+          suffixIcon: widget.isPasswordField == true
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  child: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white,
+                  ),
+                )
+              : null, // Set to null if it's not a password field
         ),
         onSaved: widget.onSaved,
         validator: widget.validator,

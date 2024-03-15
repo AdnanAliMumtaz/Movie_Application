@@ -3,9 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:movie_app/login.dart';
 import 'package:movie_app/register.dart';
 import 'package:movie_app/splashScreen.dart';
-import 'trending.dart';
-import 'search.dart';
-import 'home.dart';
 import 'package:movie_app/Common_Utilities/navigationBar.dart';
 
 Future main() async {
@@ -27,15 +24,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      title: 'Modiv',
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Colors.red,
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Colors.red,
+          cursorColor: Colors.red,
+          selectionHandleColor: Colors.red,
+        ),
+        appBarTheme: const AppBarTheme(
+          toolbarHeight: 75,
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 25,
+          ),
+        ),
+      ),
       routes: {
+        // Define routes for navigation
         '/': (context) => const SplashScreen(
-              child: Login(),
+              child: Login(), // Show SplashScreen with Login as initial route
             ),
-        '/login': (context) => const Login(),
-        '/register': (context) => const Register(),
-        '/home': (context) => const Navigation(),
+        '/login': (context) => const Login(), // Route to login screen
+        '/register': (context) => const Register(), // Route to register screen
+        '/home': (context) =>
+            const NavigationBottomBar(), // Route to home screen with bottom navigation bar
       },
     );
   }

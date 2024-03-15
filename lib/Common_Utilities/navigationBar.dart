@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/trending.dart';
+import 'package:movie_app/internetChecker.dart';
+import 'package:movie_app/settings.dart';
 import 'package:movie_app/search.dart';
 import 'package:movie_app/home.dart';
 import 'package:movie_app/watch.dart';
 
-class Navigation extends StatefulWidget {
-  const Navigation({super.key});
+class NavigationBottomBar extends StatefulWidget {
+  const NavigationBottomBar({Key? key}) : super(key: key);
 
   @override
-  _NavigationState createState() => _NavigationState();
+  _NavigationBottomBarState createState() => _NavigationBottomBarState();
 }
 
-class _NavigationState extends State<Navigation> {
-  int _selectedIndex = 0;
-  final PageController _pageController = PageController();
-
+class _NavigationBottomBarState extends State<NavigationBottomBar> {
+  // List of pages to be displayed
   final List<Widget> _pages = [
     Home(),
     Search(),
@@ -22,72 +21,95 @@ class _NavigationState extends State<Navigation> {
     Settings(),
   ];
 
+  // Icons corresponding to each page
+  static const List<IconData> _icons = [
+    Icons.home,
+    Icons.search,
+    Icons.watch,
+    Icons.settings,
+  ];
+
+  // Controller for handling page navigation
+  final PageController _pageController = PageController();
+  int _selectedIndex = 0;
+
+  // Function to handle bottom navigation bar item tap
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
+    // Only update state if the selected index changes
+    if (index != _selectedIndex) {
+      setState(() {
+        _selectedIndex = index;
+        _pageController.animateToPage(
+          index,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Modiv',),
-        backgroundColor: Colors.black,
-        automaticallyImplyLeading: false,
-      ),
-      body: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
-            children: _pages,
-            onPageChanged: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+    return InternetChecker(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Modiv',
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              height: 70,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Colors.black,
-                    Colors.black.withOpacity(0.7),
-                    Colors.black.withOpacity(0.5),
-                    Colors.transparent
-                  ],
+          backgroundColor: Colors.black,
+          automaticallyImplyLeading: false,
+        ),
+        body: Stack(
+          children: [
+            // PageView for displaying pages
+            PageView(
+              controller: _pageController,
+              children: _pages,
+              onPageChanged: (index) {
+                // Update selected index when the page changes
+                if (index != _selectedIndex) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                }
+              },
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.black,
+                      Colors.black.withOpacity(0.7),
+                      Colors.black.withOpacity(0.5),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    _icons.length,
+                    (index) => buildNavBarItem(_icons[index], _pages[index], index),
+                  ),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  buildNavBarItem(Icons.home, 'Home', 0),
-                  buildNavBarItem(Icons.search, 'Search', 1),
-                  buildNavBarItem(Icons.watch, 'Watch', 2),
-                  buildNavBarItem(Icons.settings, 'Settings', 3),
-                ],
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget buildNavBarItem(IconData icon, String title, int index) {
-    bool isSelected = index == _selectedIndex;
+  // Widget for building bottom navigation bar item
+  Widget buildNavBarItem(IconData icon, Widget page, int index) {
+    final bool isSelected = index == _selectedIndex;
     return Expanded(
       child: GestureDetector(
         onTap: () => _onItemTapped(index),
@@ -102,8 +124,15 @@ class _NavigationState extends State<Navigation> {
                 color: isSelected ? Colors.white : Colors.grey,
               ),
               const SizedBox(height: 4),
+              // Display text based on the type of page
               Text(
-                title,
+                page is Home
+                    ? 'Home'
+                    : page is Search
+                        ? 'Search'
+                        : page is Watch
+                            ? 'Watch'
+                            : 'Settings',
                 style: TextStyle(
                   color: isSelected ? Colors.white : Colors.grey,
                 ),

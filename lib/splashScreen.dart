@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/internetChecker.dart';
 import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,14 +26,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Image.asset(
-          'Assets/images/modiv.png',
-          
-          width: 100,
-          height: 100,
+    return InternetChecker(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: Image.asset(
+            'Assets/images/modiv.png',
+            
+            width: 100,
+            height: 100,
+          ),
         ),
       ),
     );
