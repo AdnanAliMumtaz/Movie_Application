@@ -17,17 +17,17 @@ The Movie Enthusiasts Mobile App allows users to:
 
 ## Screenshots
 <div align="center">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/7347e363-7e6c-42bc-b3f0-4928ad75f043" alt="Screenshot_20240620_122053" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/1be76063-0149-4e89-a1f2-2b7bd30b72a4" alt="Screenshot_20240620_122048" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/4bd68daa-e1ca-48d4-b59a-b02335ed0840" alt="Screenshot_20240620_122145" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/bc572bca-e497-4fd4-a938-cfbfe3d293d5" alt="Screenshot_20240620_122148" width="220">    
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/009195d7-c1f2-4fc8-8c4c-0b5d0c8a67cd" alt="Screenshot_20240620_122154" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/56bca8cb-9fa5-4e13-a6b2-569abef4489c" alt="Screenshot_20240620_122157" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/8f8522c1-b49f-44cb-9ff2-2e998c7137f9" alt="Screenshot_20240620_122205" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/f5cfd486-d0f2-47cc-90c3-7adf9d720962" alt="Screenshot_20240620_122209" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/bb8a61b4-f930-4919-830f-8198531f7ee3" alt="Screenshot_20240620_122222" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/18ae492d-eb6d-4893-8dcb-7c12e8a171bb" alt="Screenshot_20240620_122225" width="220">
-<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/3e65d803-04d7-4b39-a119-ef1c399b49ea" alt="Screenshot_20240620_122213" width="220">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/7347e363-7e6c-42bc-b3f0-4928ad75f043" alt="Screenshot_20240620_122053" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/1be76063-0149-4e89-a1f2-2b7bd30b72a4" alt="Screenshot_20240620_122048" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/4bd68daa-e1ca-48d4-b59a-b02335ed0840" alt="Screenshot_20240620_122145" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/bc572bca-e497-4fd4-a938-cfbfe3d293d5" alt="Screenshot_20240620_122148" width="200">    
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/009195d7-c1f2-4fc8-8c4c-0b5d0c8a67cd" alt="Screenshot_20240620_122154" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/56bca8cb-9fa5-4e13-a6b2-569abef4489c" alt="Screenshot_20240620_122157" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/8f8522c1-b49f-44cb-9ff2-2e998c7137f9" alt="Screenshot_20240620_122205" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/f5cfd486-d0f2-47cc-90c3-7adf9d720962" alt="Screenshot_20240620_122209" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/bb8a61b4-f930-4919-830f-8198531f7ee3" alt="Screenshot_20240620_122222" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/18ae492d-eb6d-4893-8dcb-7c12e8a171bb" alt="Screenshot_20240620_122225" width="200">
+<img src="https://github.com/AdnanAliMumtaz/Movie_Application/assets/81415901/3e65d803-04d7-4b39-a119-ef1c399b49ea" alt="Screenshot_20240620_122213" width="200">
 </div>
 
 
